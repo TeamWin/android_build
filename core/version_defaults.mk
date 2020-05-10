@@ -97,7 +97,6 @@ ifndef PLATFORM_VERSION
     PLATFORM_VERSION := $(TARGET_PLATFORM_VERSION)
   endif
 endif
-.KATI_READONLY := PLATFORM_VERSION
 
 ifndef PLATFORM_SDK_VERSION
   # This is the canonical definition of the SDK version, which defines

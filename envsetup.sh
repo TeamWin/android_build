@@ -755,6 +755,24 @@ function lunch()
         return 1
     fi
 
+<<<<<<< HEAD   (f20099 Version bump to TP1A.220624.021.A1 [core/build_id.mk])
+=======
+    if ! check_product $product
+    then
+        # if we can't find a product, try to grab it off the TeamWin GitHub
+        T=$(gettop)
+        cd $T > /dev/null
+        vendor/twrp/build/tools/roomservice.py $product
+        cd - > /dev/null
+        check_product $product
+    else
+        T=$(gettop)
+        cd $T > /dev/null
+        vendor/twrp/build/tools/roomservice.py $product true
+        cd - > /dev/null
+    fi
+
+>>>>>>> CHANGE (122eac envsetup: Fix the way we check check_product's return value)
     TARGET_PRODUCT=$product \
     TARGET_BUILD_VARIANT=$variant \
     TARGET_PLATFORM_VERSION=$version \

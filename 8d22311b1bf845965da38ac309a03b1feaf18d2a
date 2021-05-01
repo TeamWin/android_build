@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff44831_9427aec1",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-05-01T16:10:34Z",
+      "side": 1,
+      "message": "This says lineage, not twrp",
+      "revId": "8d22311b1bf845965da38ac309a03b1feaf18d2a",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

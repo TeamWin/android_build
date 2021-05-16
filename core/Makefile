@@ -955,6 +955,10 @@ else ifeq ($(BOARD_RAMDISK_USE_XZ),true)
 COMPRESSION_COMMAND_DEPS := $(XZ)
 COMPRESSION_COMMAND := $(XZ) -f -c --check=crc32 --lzma2=dict=32MiB
 RAMDISK_EXT := .xz
+else ifeq ($(BOARD_RAMDISK_USE_LZMA),true)
+COMPRESSION_COMMAND_DEPS := $(LZMA)
+COMPRESSION_COMMAND := $(LZMA) -f -c
+RAMDISK_EXT := .lz
 else
 COMPRESSION_COMMAND_DEPS := $(MINIGZIP)
 COMPRESSION_COMMAND := $(MINIGZIP)
@@ -5367,6 +5371,9 @@ ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 endif
 ifeq ($(BOARD_RAMDISK_USE_XZ),true)
 	echo "xz_ramdisks=true" >> $@
+endif
+ifeq ($(BOARD_RAMDISK_USE_LZMA),true)
+	echo "lzma_ramdisks=true" >> $@
 endif
 ifneq ($(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
 	echo "vendor_boot=true" >> $@

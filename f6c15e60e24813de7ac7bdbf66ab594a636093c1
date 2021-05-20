@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b76f4ff_3e230c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 156
+      },
+      "writtenOn": "2021-05-20T14:39:55Z",
+      "side": 1,
+      "message": "When building experimental tegra targets, I was getting several errors saying my vintf fragments were duplicated. After some checking, I found this in the Lineage history and picked it over.",
+      "revId": "f6c15e60e24813de7ac7bdbf66ab594a636093c1",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

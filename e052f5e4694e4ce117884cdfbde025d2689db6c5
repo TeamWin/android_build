@@ -34,6 +34,24 @@
       "parentUuid": "a1ccb899_5e2d3915",
       "revId": "e052f5e4694e4ce117884cdfbde025d2689db6c5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073f4d2b_dc199ab5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-30T22:30:56Z",
+      "side": 1,
+      "message": "twres is for image and theme resources, I suppose it could stay.",
+      "parentUuid": "52473b67_4321afb7",
+      "revId": "e052f5e4694e4ce117884cdfbde025d2689db6c5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

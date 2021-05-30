@@ -16,6 +16,24 @@
       "message": "Should this be in recovery/root and not recovery/root/twres?",
       "revId": "e052f5e4694e4ce117884cdfbde025d2689db6c5",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52473b67_4321afb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 238
+      },
+      "writtenOn": "2021-05-30T21:11:54Z",
+      "side": 1,
+      "message": "twres felt like the correct place rather than root or system/etc given that this is a resource that will be used for repacking, but it can be moved back to root if you see it fits more there",
+      "parentUuid": "a1ccb899_5e2d3915",
+      "revId": "e052f5e4694e4ce117884cdfbde025d2689db6c5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

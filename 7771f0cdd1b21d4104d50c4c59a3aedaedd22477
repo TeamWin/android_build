@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05c29734_77545297",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-30T20:14:28Z",
+      "side": 1,
+      "message": "Can\u0027t the device specify this in their BoardConfig?",
+      "revId": "7771f0cdd1b21d4104d50c4c59a3aedaedd22477",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

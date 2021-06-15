@@ -2241,6 +2241,7 @@ $(recovery_ramdisk): $(MKBOOTFS) $(COMPRESSION_COMMAND_DEPS) \
 	  cp -f $(recovery_wipe) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.wipe)
 	ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 	cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && find . | sed "s/.\///" > ramdisk-files.txt
+	cd $(TARGET_RECOVERY_ROOT_OUT) && find -type f | sed "s/.\/ramdisk-files.sha256sum//" | sed "/lib\/modules/d" | sed "/prop.default/d" | xargs sha256sum > ramdisk-files.sha256sum
 	$(BOARD_RECOVERY_IMAGE_PREPARE)
 	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(COMPRESSION_COMMAND) > $(recovery_ramdisk)
 

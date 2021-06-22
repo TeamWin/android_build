@@ -4246,7 +4246,9 @@ BOARD_AVB_VENDOR_KERNEL_BOOT_ADD_HASH_FOOTER_ARGS += \
     --prop com.android.build.vendor_kernel_boot.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
 
 BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
-    --prop com.android.build.recovery.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)
+    --prop com.android.build.recovery.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE) \
+    --prop com.android.build.boot.os_version:$(PLATFORM_VERSION) \
+    --prop com.android.build.boot.security_patch:$(PLATFORM_SECURITY_PATCH)
 
 BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += \
     --prop com.android.build.vendor.fingerprint:$(BUILD_FINGERPRINT_FROM_FILE)

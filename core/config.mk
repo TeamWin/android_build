@@ -899,6 +899,9 @@ $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
 
 # BOARD_*_PARTITION_LIST: a list of the following tokens
 valid_super_partition_list := system vendor product product_services odm
+ifneq ($(TW_UNIQUE_LOGICAL_PARTITIONS_PARTITION_LIST),)
+valid_super_partition_list += $(TW_UNIQUE_LOGICAL_PARTITIONS_PARTITION_LIST)
+endif
 $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
     $(if $(filter-out $(valid_super_partition_list),$(BOARD_$(group)_PARTITION_LIST)), \
         $(error BOARD_$(group)_PARTITION_LIST contains invalid partition name \

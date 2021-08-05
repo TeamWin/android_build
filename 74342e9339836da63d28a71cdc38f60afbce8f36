@@ -16,6 +16,23 @@
       "message": "Tested with realme6 trees. Since the partition list is present in the board_group list as well as in the unique partition list, the recovery should handle them normally. I might be wrong but the only limiting factor I found was the valid_super_partition_list. The same issue is addressed in  https://gerrit.twrp.me/c/android_bootable_recovery/+/30093da4b535a32ba24c053490c8596ecede6ca1606d but it was WIP since December 2020 so thought I\u0027d upload my solution. ",
       "revId": "74342e9339836da63d28a71cdc38f60afbce8f36",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9da1b9e_6c5d618d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 535
+      },
+      "writtenOn": "2021-08-05T04:20:20Z",
+      "side": 1,
+      "message": "Ah sorry I pasted 2 things there. This is the link I meant to refer to:\nhttps://gerrit.twrp.me/c/android_bootable_recovery/+/3009",
+      "revId": "74342e9339836da63d28a71cdc38f60afbce8f36",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

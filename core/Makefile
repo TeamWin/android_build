@@ -1990,12 +1990,76 @@ RECOVERY_INSTALLING_SECURITY_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE)
 RECOVERY_ERASING_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/erasing_text.png
 RECOVERY_ERROR_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/error_text.png
 RECOVERY_NO_COMMAND_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/no_command_text.png
+RECOVERY_TWRES_DIR := $(call intermediates-dir-for,PACKAGING,twres_files)
 
 RECOVERY_CANCEL_WIPE_DATA_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/cancel_wipe_data_text.png
 RECOVERY_FACTORY_DATA_RESET_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/factory_data_reset_text.png
 RECOVERY_TRY_AGAIN_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/try_again_text.png
 RECOVERY_WIPE_DATA_CONFIRMATION_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/wipe_data_confirmation_text.png
 RECOVERY_WIPE_DATA_MENU_HEADER_TEXT_FILE := $(dir $(RECOVERY_INSTALLING_TEXT_FILE))/wipe_data_menu_header_text.png
+
+TWRP_RES := bootable/recovery/gui/theme/common/fonts
+TWRP_RES += bootable/recovery/gui/theme/common/languages
+ifeq ($(TW_EXTRA_LANGUAGES),true)
+    TWRP_RES += bootable/recovery/gui/theme/extra-languages/fonts
+    TWRP_RES += bootable/recovery/gui/theme/extra-languages/languages
+endif
+
+ifeq ($(TW_CUSTOM_THEME),)
+    ifeq ($(TW_THEME),)
+        ifeq ($(DEVICE_RESOLUTION),)
+            GUI_WIDTH := $(TARGET_SCREEN_WIDTH)
+            GUI_HEIGHT := $(TARGET_SCREEN_HEIGHT)
+        else
+            SPLIT_DEVICE_RESOLUTION := $(subst x, ,$(DEVICE_RESOLUTION))
+            GUI_WIDTH := $(word 1, $(SPLIT_DEVICE_RESOLUTION))
+            GUI_HEIGHT := $(word 2, $(SPLIT_DEVICE_RESOLUTION))
+        endif
+
+        # Minimum resolution of 100x100
+        # This also ensures GUI_WIDTH and GUI_HEIGHT are numbers
+        ifeq ($(shell test $(GUI_WIDTH) -ge 100; echo $$?),0)
+        ifeq ($(shell test $(GUI_HEIGHT) -ge 100; echo $$?),0)
+            ifeq ($(shell test $(GUI_WIDTH) -gt $(GUI_HEIGHT); echo $$?),0)
+                ifeq ($(shell test $(GUI_WIDTH) -ge 1280; echo $$?),0)
+                    TW_THEME := landscape_hdpi
+                else
+                    TW_THEME := landscape_mdpi
+                endif
+            else ifeq ($(shell test $(GUI_WIDTH) -lt $(GUI_HEIGHT); echo $$?),0)
+                ifeq ($(shell test $(GUI_WIDTH) -ge 720; echo $$?),0)
+                    TW_THEME := portrait_hdpi
+                else
+                    TW_THEME := portrait_mdpi
+                endif
+            else ifeq ($(shell test $(GUI_WIDTH) -eq $(GUI_HEIGHT); echo $$?),0)
+                # watch_hdpi does not yet exist
+                TW_THEME := watch_mdpi
+            endif
+        endif
+        endif
+    endif
+
+    TWRP_THEME_LOC := bootable/recovery/gui/theme/$(TW_THEME)
+    ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
+        $(warning $(TW_THEME_WARNING_MSG))
+        $(error Theme selection failed; exiting)
+    endif
+
+    TWRP_RES += bootable/recovery/gui/theme/common/$(word 1,$(subst _, ,$(TW_THEME))).xml
+    # for future copying of used include xmls and fonts:
+    # UI_XML := $(TWRP_THEME_LOC)/ui.xml
+    # TWRP_INCLUDE_XMLS := $(shell xmllint --xpath '/recovery/include/xmlfile/@name' $(UI_XML)|sed -n 's/[^\"]*\"\([^\"]*\)\"[^\"]*/\1\n/gp'|sort|uniq)
+    # TWRP_FONTS_TTF := $(shell xmllint --xpath '/recovery/resources/font/@filename' $(UI_XML)|sed -n 's/[^\"]*\"\([^\"]*\)\"[^\"]*/\1\n/gp'|sort|uniq)niq)
+else
+    TWRP_THEME_LOC := $(TW_CUSTOM_THEME)
+    ifeq ($(wildcard $(TWRP_THEME_LOC)/ui.xml),)
+        $(warning $(TW_CUSTOM_THEME_WARNING_MSG))
+        $(error Theme selection failed; exiting)
+    endif
+endif
+
+TWRP_RES += $(TW_ADDITIONAL_RES)
 
 generated_recovery_text_files := \
   $(RECOVERY_INSTALLING_TEXT_FILE) \
@@ -2014,6 +2078,7 @@ image_generator_jar := $(HOST_OUT_JAVA_LIBRARIES)/RecoveryImageGenerator.jar
 zopflipng := $(HOST_OUT_EXECUTABLES)/zopflipng
 $(RECOVERY_INSTALLING_TEXT_FILE): PRIVATE_SOURCE_FONTS := $(recovery_noto-fonts_dep) $(recovery_roboto-fonts_dep)
 $(RECOVERY_INSTALLING_TEXT_FILE): PRIVATE_RECOVERY_FONT_FILES_DIR := $(call intermediates-dir-for,PACKAGING,recovery_font_files)
+$(RECOVERY_INSTALLING_TEXT_FILE): PRIVATE_RECOVERY_TWRES_DIR := $(call intermediates-dir-for,PACKAGING,twres_files)
 $(RECOVERY_INSTALLING_TEXT_FILE): PRIVATE_RESOURCE_DIR := $(resource_dir)
 $(RECOVERY_INSTALLING_TEXT_FILE): PRIVATE_IMAGE_GENERATOR_JAR := $(image_generator_jar)
 $(RECOVERY_INSTALLING_TEXT_FILE): PRIVATE_ZOPFLIPNG := $(zopflipng)
@@ -2035,19 +2100,23 @@ $(RECOVERY_INSTALLING_TEXT_FILE): $(image_generator_jar) $(resource_dir) $(recov
 	# Prepares the font directory.
 	@rm -rf $(PRIVATE_RECOVERY_FONT_FILES_DIR)
 	@mkdir -p $(PRIVATE_RECOVERY_FONT_FILES_DIR)
-	$(foreach filename,$(PRIVATE_SOURCE_FONTS), cp $(filename) $(PRIVATE_RECOVERY_FONT_FILES_DIR) &&) true
-	@rm -rf $(dir $@)
-	@mkdir -p $(dir $@)
-	$(foreach text_name,$(PRIVATE_RECOVERY_BACKGROUND_TEXT_LIST) $(PRIVATE_RECOVERY_WIPE_DATA_TEXT_LIST), \
-	  $(eval output_file := $(dir $@)/$(patsubst recovery_%,%_text.png,$(text_name))) \
-	  $(eval center_alignment := $(if $(filter $(text_name),$(PRIVATE_RECOVERY_BACKGROUND_TEXT_LIST)), --center_alignment)) \
-	  java -jar $(PRIVATE_IMAGE_GENERATOR_JAR) \
-	    --image_width $(PRIVATE_RECOVERY_IMAGE_WIDTH) \
-	    --text_name $(text_name) \
-	    --font_dir $(PRIVATE_RECOVERY_FONT_FILES_DIR) \
-	    --resource_dir $(PRIVATE_RESOURCE_DIR) \
-	    --output_file $(output_file) $(center_alignment) && \
-	  $(PRIVATE_ZOPFLIPNG) -y --iterations=1 --filters=0 $(output_file) $(output_file) > /dev/null &&) true
+	@rm -rf $(PRIVATE_RECOVERY_TWRES_DIR)
+	@mkdir -p $(PRIVATE_RECOVERY_TWRES_DIR)
+	@cp -fr $(TWRP_RES) $(PRIVATE_RECOVERY_TWRES_DIR)
+	@cp -fr $(TWRP_THEME_LOC)/* $(PRIVATE_RECOVERY_TWRES_DIR)
+	#$(foreach filename,$(PRIVATE_SOURCE_FONTS), cp $(filename) $(PRIVATE_RECOVERY_FONT_FILES_DIR) &&) true
+	#@rm -rf $(dir $@)
+	#@mkdir -p $(dir $@)
+	#$(foreach text_name,$(PRIVATE_RECOVERY_BACKGROUND_TEXT_LIST) $(PRIVATE_RECOVERY_WIPE_DATA_TEXT_LIST), \
+	  #$(eval output_file := $(dir $@)/$(patsubst recovery_%,%_text.png,$(text_name))) \
+	  #$(eval center_alignment := $(if $(filter $(text_name),$(PRIVATE_RECOVERY_BACKGROUND_TEXT_LIST)), --center_alignment)) \
+	  #java -jar $(PRIVATE_IMAGE_GENERATOR_JAR) \
+	  #  --image_width $(PRIVATE_RECOVERY_IMAGE_WIDTH) \
+	  #  --text_name $(text_name) \
+	  #  --font_dir $(PRIVATE_RECOVERY_FONT_FILES_DIR) \
+	  #  --resource_dir $(PRIVATE_RESOURCE_DIR) \
+	  #  --output_file $(output_file) $(center_alignment) && \
+	  #$(PRIVATE_ZOPFLIPNG) -y --iterations=1 --filters=0 $(output_file) $(output_file) > /dev/null &&) true
 else
 RECOVERY_INSTALLING_TEXT_FILE :=
 RECOVERY_INSTALLING_SECURITY_TEXT_FILE :=
@@ -2227,10 +2296,13 @@ $(recovery_ramdisk): $(MKBOOTFS) $(COMPRESSION_COMMAND_DEPS) \
 	cp $(TARGET_ROOT_OUT)/init.recovery.*.rc $(TARGET_RECOVERY_ROOT_OUT)/ 2> /dev/null || true # Ignore error when the src file doesn't exist.
 	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/res
 	rm -rf $(TARGET_RECOVERY_ROOT_OUT)/res/*
-	cp -rf $(recovery_resources_common)/* $(TARGET_RECOVERY_ROOT_OUT)/res
-	$(foreach recovery_text_file,$(generated_recovery_text_files), \
-	  cp -rf $(recovery_text_file) $(TARGET_RECOVERY_ROOT_OUT)/res/images/ &&) true
-	cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
+	#cp -rf $(recovery_resources_common)/* $(TARGET_RECOVERY_ROOT_OUT)/res
+	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/twres
+	rm -rf $(TARGET_RECOVERY_ROOT_OUT)/twres/*
+	cp -rf $(RECOVERY_TWRES_DIR)/* $(TARGET_RECOVERY_ROOT_OUT)/twres
+	#$(foreach recovery_text_file,$(generated_recovery_text_files), \
+	  #cp -rf $(recovery_text_file) $(TARGET_RECOVERY_ROOT_OUT)/res/images/ &&) true
+	#cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
 	$(hide) $(foreach item,$(recovery_root_private), \
 	  cp -rf $(item) $(TARGET_RECOVERY_OUT)/;)
 	$(foreach item,$(TARGET_PRIVATE_RES_DIRS), \

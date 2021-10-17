@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55ca5d5_eea8835c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-10-17T21:19:43Z",
+      "side": 1,
+      "message": "This relation chain fixes the lunch issue for me.",
+      "revId": "373a1018ed6307bd62408ed37cac5fc4a2a1fa03",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

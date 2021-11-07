@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c0ffbf_964026d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-07T03:16:07Z",
+      "side": 1,
+      "message": "This change appears to be incorporated in one of the others, making it redundant.",
+      "revId": "7bfebb48bc5898ca612684a0fdbf59c976b514f0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

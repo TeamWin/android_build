@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf285fc2_9ab8127c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-07T03:14:54Z",
+      "side": 1,
+      "message": "Can we exclude files related to phony packages? i.e. files ending in \"-timestamp\" that end up in the ramdisk? There\u0027s no need to include them in the repack.",
+      "revId": "6111e8bcbb04aec9f295ed7c89746c5892a0fd52",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

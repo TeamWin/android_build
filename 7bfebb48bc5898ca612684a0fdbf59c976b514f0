@@ -34,6 +34,24 @@
       "parentUuid": "a5c0ffbf_964026d8",
       "revId": "7bfebb48bc5898ca612684a0fdbf59c976b514f0",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb7a12f_5d171f3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-11-14T01:05:59Z",
+      "side": 1,
+      "message": "This is the current code:\nhttps://github.com/TeamWin/android_build/blob/android-9.0/core/Makefile#L1445\n\nDoesn\u0027t that match what this change is doing?",
+      "parentUuid": "44c75d47_0c8215c4",
+      "revId": "7bfebb48bc5898ca612684a0fdbf59c976b514f0",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

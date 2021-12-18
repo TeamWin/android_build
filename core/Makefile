@@ -1930,6 +1930,7 @@ recovery_sepolicy := \
 IGNORE_RECOVERY_SEPOLICY := $(patsubst $(TARGET_RECOVERY_OUT)/%,--exclude=/%,$(recovery_sepolicy))
 
 recovery_kernel := $(INSTALLED_KERNEL_TARGET) # same as a non-recovery system
+recovery_uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery.cpio
 recovery_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery.img
 recovery_resources_common := $(call include-path-for, recovery)/res
 
@@ -2204,7 +2205,7 @@ ifndef BOARD_RECOVERY_MKBOOTIMG_ARGS
   BOARD_RECOVERY_MKBOOTIMG_ARGS := $(BOARD_MKBOOTIMG_ARGS)
 endif
 
-$(recovery_ramdisk): $(MKBOOTFS) $(COMPRESSION_COMMAND_DEPS) \
+$(recovery_uncompressed_ramdisk): $(MKBOOTFS) \
 	    $(INTERNAL_ROOT_FILES) \
 	    $(INSTALLED_RAMDISK_TARGET) \
 	    $(INTERNAL_RECOVERYIMAGE_FILES) \
@@ -2231,19 +2232,24 @@ $(recovery_ramdisk): $(MKBOOTFS) $(COMPRESSION_COMMAND_DEPS) \
 	$(foreach recovery_text_file,$(generated_recovery_text_files), \
 	  cp -rf $(recovery_text_file) $(TARGET_RECOVERY_ROOT_OUT)/res/images/ &&) true
 	cp -f $(recovery_font) $(TARGET_RECOVERY_ROOT_OUT)/res/images/font.png
-	$(hide) $(foreach item,$(recovery_root_private), \
+	$(foreach item,$(recovery_root_private), \
 	  cp -rf $(item) $(TARGET_RECOVERY_OUT)/;)
 	$(foreach item,$(TARGET_PRIVATE_RES_DIRS), \
-	  cp -rf $(item) $(TARGET_RECOVERY_ROOT_OUT)/$(newline))
+	  cp -rf $(item) $(TARGET_RECOVERY_ROOT_OUT)/$(newline);)
 	$(foreach item,$(recovery_fstab), \
-	  cp -f $(item) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.fstab)
+	  cp -f $(item) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.fstab;)
 	$(if $(strip $(recovery_wipe)), \
 	  cp -f $(recovery_wipe) $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.wipe)
 	ln -sf prop.default $(TARGET_RECOVERY_ROOT_OUT)/default.prop
 	cd $(TARGET_RECOVERY_ROOT_OUT) && touch ramdisk-files.txt && touch ramdisk-files.sha256sum && find . | sed "s/.\///" | sed "/lib\/modules\//d" > ramdisk-files.txt
 	cd $(TARGET_RECOVERY_ROOT_OUT) && find -type f | sed "s/.\/ramdisk-files.sha256sum//" | sed "/lib\/modules/d" | sed "/prop.default/d" | xargs sha256sum > ramdisk-files.sha256sum
 	$(BOARD_RECOVERY_IMAGE_PREPARE)
-	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) | $(COMPRESSION_COMMAND) > $(recovery_ramdisk)
+	@echo ----- Making uncompressed recovery ramdisk ------
+	$(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RECOVERY_ROOT_OUT) > $@
+
+$(recovery_ramdisk): $(recovery_uncompressed_ramdisk) $(COMPRESSION_COMMAND_DEPS)
+	@echo ----- Making compressed recovery ramdisk ------
+	$(COMPRESSION_COMMAND) < $(recovery_uncompressed_ramdisk) > $@
 
 # $(1): output file
 # $(2): kernel file
@@ -2300,10 +2306,27 @@ ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
 $(INSTALLED_BOOTIMAGE_TARGET): $(recoveryimage-deps)
 	$(call pretty,"Target boot image from recovery: $@")
 	$(call build-recoveryimage-target, $@, $(PRODUCT_OUT)/$(subst .img,,$(subst boot,kernel,$(notdir $@))))
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(USE_RECOVERY_INSTALLER),true)
+ifneq ($(RECOVERY_INSTALLER_PATH),)
+	cp -fr $(RECOVERY_INSTALLER_PATH) $(PRODUCT_OUT)/installer && cp -f $(recovery_uncompressed_ramdisk) $(PRODUCT_OUT)/installer && cd $(PRODUCT_OUT)/installer && zip -qr recovery-installer META-INF magiskboot ramdisk-recovery.cpio && cp -f recovery-installer.zip ../ && rm recovery-installer.zip && rm ramdisk-recovery.cpio
+	$(call pretty,"Making recovery installer for A/B devices: $(PRODUCT_OUT)/recovery-installer.zip")
+endif
+endif
+endif
 endif # BOARD_USES_RECOVERY_AS_BOOT
 
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(recoveryimage-deps)
 	$(call build-recoveryimage-target, $@, $(recovery_kernel))
+
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(USE_RECOVERY_INSTALLER),true)
+ifneq ($(RECOVERY_INSTALLER_PATH),)
+	cp -fr $(RECOVERY_INSTALLER_PATH) $(PRODUCT_OUT)/installer && cp -f $(INSTALLED_RECOVERYIMAGE_TARGET) $(PRODUCT_OUT)/installer && cd $(PRODUCT_OUT)/installer && zip -qr recovery-installer META-INF magiskboot recovery.img && cp -f recovery-installer.zip ../ && rm recovery-installer.zip && rm recovery.img
+	$(call pretty,"Making recovery installer for A/B devices: $(PRODUCT_OUT)/recovery-installer.zip")
+endif
+endif
+endif
 
 ifdef RECOVERY_RESOURCE_ZIP
 $(RECOVERY_RESOURCE_ZIP): $(INSTALLED_RECOVERYIMAGE_TARGET) | $(ZIPTIME)

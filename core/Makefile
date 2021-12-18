@@ -2540,16 +2540,42 @@ $(foreach b,$(INSTALLED_BOOTIMAGE_TARGET), $(eval $(call add-dependency,$(b),$(c
 $(INSTALLED_BOOTIMAGE_TARGET): $(recoveryimage-deps)
 	$(call pretty,"Target boot image from recovery: $@")
 	$(call build-recoveryimage-target, $@, $(PRODUCT_OUT)/$(subst .img,,$(subst boot,kernel,$(notdir $@))))
+<<<<<<< HEAD   (070b69 inherit BoardConfigTWRP)
 
 $(call declare-container-license-metadata,$(INSTALLED_BOOTIMAGE_TARGET),SPDX-license-identifier-GPL-2.0-only SPDX-license-identifier-Apache-2.0,restricted notice,$(BUILD_SYSTEM)/LINUX_KERNEL_COPYING build/soong/licenses/LICENSE,"Boot Image",bool)
 $(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(recoveryimage-deps),$(PRODUCT_OUT)/:/)
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_BOOTIMAGE_TARGET)
+=======
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(USE_RECOVERY_INSTALLER),true)
+ifneq ($(RECOVERY_INSTALLER_PATH),)
+	cp -fr $(RECOVERY_INSTALLER_PATH) $(PRODUCT_OUT)/installer && cp -f $(recovery_uncompressed_ramdisk) $(PRODUCT_OUT)/installer && cd $(PRODUCT_OUT)/installer && zip -qr recovery-installer META-INF magiskboot-$(TARGET_ARCH) ramdisk-recovery.cpio && cp -f recovery-installer.zip ../ && rm recovery-installer.zip && rm ramdisk-recovery.cpio
+	$(call pretty,"Making recovery installer for A/B devices: $(PRODUCT_OUT)/recovery-installer.zip")
+endif
+endif
+endif
+>>>>>>> CHANGE (bc6dc8 build: add option to create recovery installer zip)
 endif # BOARD_USES_RECOVERY_AS_BOOT
 
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(recoveryimage-deps)
 	$(call build-recoveryimage-target, $@, \
 	  $(if $(filter true, $(BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE)),, $(recovery_kernel)))
+<<<<<<< HEAD   (070b69 inherit BoardConfigTWRP)
+=======
+
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(USE_RECOVERY_INSTALLER),true)
+ifneq ($(RECOVERY_INSTALLER_PATH),)
+	cp -fr $(RECOVERY_INSTALLER_PATH) $(PRODUCT_OUT)/installer && cp -f $(INSTALLED_RECOVERYIMAGE_TARGET) $(PRODUCT_OUT)/installer && cd $(PRODUCT_OUT)/installer && zip -qr recovery-installer META-INF magiskboot-$(TARGET_ARCH) recovery.img && cp -f recovery-installer.zip ../ && rm recovery-installer.zip && rm recovery.img
+	$(call pretty,"Making recovery installer for A/B devices: $(PRODUCT_OUT)/recovery-installer.zip")
+endif
+endif
+endif
+else
+INTERNAL_RECOVERYIMAGE_ARGS += --kernel $(recovery_kernel)
+endif # BOARD_CUSTOM_BOOTIMG_MK
+>>>>>>> CHANGE (bc6dc8 build: add option to create recovery installer zip)
 
 ifdef RECOVERY_RESOURCE_ZIP
 $(RECOVERY_RESOURCE_ZIP): $(INSTALLED_RECOVERYIMAGE_TARGET) | $(ZIPTIME)

@@ -1,4 +1,22 @@
 {
   "pushCert": "certificate version 0.1\npusher 9A65CD26718A4E9F 1639946275 -0500\npushee ssh://gerrit.twrp.me:29418/android_build\nnonce 1639946278-805C7248297EDC6420FB27E1726F83DE28D262DA\n\n0000000000000000000000000000000000000000 05a7baff7b3c3587f4d751357212453a482bdc93 refs/for/android-11\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEEqRr5EFtQo04uAf5smmXNJnGKTp8FAmG/mCMACgkQmmXNJnGK\nTp8sjBAAnUBPiLvJv6z5JvtaVDo00n1IhvAcFmU+LVt7YU21v0ZYzbB1ILsB/kWJ\nXgT0kJ0CzPKYeKcWC8qb9msOEhk3XP8oZ8Klp8o8qrf455o+9yP2ECV9TA37estx\ngLUpibA40Y2Ox4slYuEbOgZ6IK/9lMVsd85ItrxnMZ51c68TbjEtoojympHFuV7H\nHU55E2qwneSf/ixwvimvndqdyZ4EvnMDy0fXROmn9KdwH87lZbeUsDCnYTKSe0Ps\nu9E+dfMK05iB2yLtwvNYBTCIK4Nucc5gn18+HNBytF9WNkyUQUZcto7Utv1ET2F3\nqkadiYyPiV2Edxou5w45s7pQ4YoFGfk+LmoPu10wc1uDNw9K3406GQPZGYLXDrhg\npQdKbkQLEY4+bz0ERGJAT8XzNA/u92xchIEgUOl3dDys1sEaii/sMI997Ec6Nh7u\nhiPBiAj4ZAgc6k3n0hBtH69BSIAlZOC5qjiuDwZR/Yr4dBkk/ZxUgoEtPMBCpXM/\nlE8914fi8UlA+ZQRvSyXyF4icjoygAHCJAR/n6bmXsmMdyRz+wkChviKaB8X6Fmq\nGo6wuQB3kSVJbIbuKDQcX7bGSN8ca2IwvApYBaZry5XumG2nCJ99Jc9/GFjyqBE3\nn2oaMjT4ZdMKYru1XCEuMUjo3WBInCePFmEbHdGWi0t2lOLqZJI\u003d\n\u003dvV/u\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83042f4b_553e3725",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-19T20:42:23Z",
+      "side": 1,
+      "message": "This will create a zip for any AB devices with these flags included. For recoveryimage target, the entire recovery.img will be included, and for bootimage, recovery-ramdisk.cpio will be included.\n\nI don\u0027t know if we actually want to merge this, but I made it available so at least people can create installer zips for local builds.",
+      "revId": "05a7baff7b3c3587f4d751357212453a482bdc93",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
 }

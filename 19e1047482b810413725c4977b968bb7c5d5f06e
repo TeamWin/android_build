@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48abba77_412554f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2021-12-20T17:47:33Z",
+      "side": 1,
+      "message": "The patch description doesn\u0027t seem to explain that it\u0027s now also for recovery_a/_b devices, as it still talks about them only being for devices without dedicated recovery partitions.\n\nAny way to ensure it syncs up with the template at build time? We wouldn\u0027t want them getting out of sync like they have in the past when maintainers built their own, or before Jenkins kept it synced.\n\nAlso it\u0027s not actually necessary for the ramdisk to be uncompressed; in the boot-as-recovery/RECOVERY_AS_BOOT scenario, provided the underlying kernel supports it, a compressed ramdisk could be included and magiskboot automatically accepts it in a recognized format instead of recompressing.",
+      "revId": "19e1047482b810413725c4977b968bb7c5d5f06e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b6ea321_afa013dc",
         "filename": "core/Makefile",
         "patchSetId": 8

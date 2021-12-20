@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e302410f_44b19a0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2021-12-20T18:40:09Z",
+      "side": 1,
+      "message": "agreed with osm0sis, I dont have A/B devices. Samsung A only.\nCan you update to not conflict with BOARD_CUSTOM_BOOTIMG_MK support.\nI would like to use mkbootimg to resize the final recovery.img then make it flashable tarball\n ",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

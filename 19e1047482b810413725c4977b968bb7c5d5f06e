@@ -18,6 +18,23 @@
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eee371a_f9e3e489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-20T16:18:15Z",
+      "side": 1,
+      "message": "Updates are working fine for me.",
+      "revId": "19e1047482b810413725c4977b968bb7c5d5f06e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b6ea321_afa013dc",

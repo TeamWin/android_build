@@ -16,6 +16,23 @@
       "message": "agreed with osm0sis, I dont have A/B devices. Samsung A only.\nCan you update to not conflict with BOARD_CUSTOM_BOOTIMG_MK support.\nI would like to use mkbootimg to resize the final recovery.img then make it flashable tarball\n ",
       "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "059dc7e0_1151e34f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 539
+      },
+      "writtenOn": "2021-12-20T18:48:31Z",
+      "side": 1,
+      "message": "\u003e Patch Set 10:\n\u003e \n\u003e \u003e Patch Set 10:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e You can rebase your patch on this one.\n\u003e \n\u003e I\u0027m confused, are you saying you need this on an A-only device? Because that\u0027s not the purpose of this zip installer. What you\u0027re describing is for something else.\nNo, Im saying this commit doesn\u0027t belong to me, but conflict with my commit. so if ramdisk not needed to be uncompressed then we can solve the conflict. \n",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

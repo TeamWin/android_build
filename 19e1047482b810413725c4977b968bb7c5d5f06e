@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa7c1b7_c9b3e15b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2021-12-20T04:38:21Z",
+      "side": 1,
+      "message": "Tested with both make bootimage and make recoveryimage and both work now on patchset 8",
+      "revId": "19e1047482b810413725c4977b968bb7c5d5f06e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

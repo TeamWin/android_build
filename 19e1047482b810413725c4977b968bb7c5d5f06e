@@ -16,6 +16,52 @@
       "message": "Tested with both make bootimage and make recoveryimage and both work now on patchset 8",
       "revId": "19e1047482b810413725c4977b968bb7c5d5f06e",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6ea321_afa013dc",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2021-12-20T04:42:48Z",
+      "side": 1,
+      "message": "I also decided to use this to ensure it properly found the ramdisk.img",
+      "range": {
+        "startLine": 2325,
+        "startChar": 69,
+        "endLine": 2325,
+        "endChar": 102
+      },
+      "revId": "19e1047482b810413725c4977b968bb7c5d5f06e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b57ec9_6d8fa4d9",
+        "filename": "core/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2021-12-20T04:42:48Z",
+      "side": 1,
+      "message": "and just like the rm on the ramdisk-recovery.cpio on make bootimage, we should nuke the installer/ramdisk.img to ensure any dirty builds won\u0027t have to risk dealing with it",
+      "range": {
+        "startLine": 2325,
+        "startChar": 290,
+        "endLine": 2325,
+        "endChar": 305
+      },
+      "revId": "19e1047482b810413725c4977b968bb7c5d5f06e",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

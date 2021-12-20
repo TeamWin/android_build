@@ -17,6 +17,29 @@
       "message": "This will create a zip for any AB devices with these flags included. For recoveryimage target, the entire recovery.img will be included, and for bootimage, recovery-ramdisk.cpio will be included.\n\nI don\u0027t know if we actually want to merge this, but I made it available so at least people can create installer zips for local builds.",
       "revId": "05a7baff7b3c3587f4d751357212453a482bdc93",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9090dc40_5a8e0e42",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2021-12-20T04:42:48Z",
+      "side": 1,
+      "message": "I had to make that patchset 8 because of this cd before the zip creation.",
+      "range": {
+        "startLine": 2312,
+        "startChar": 130,
+        "endLine": 2312,
+        "endChar": 157
+      },
+      "revId": "05a7baff7b3c3587f4d751357212453a482bdc93",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

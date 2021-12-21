@@ -50,6 +50,41 @@
       "message": "\u003e Patch Set 8: -Code-Review\n\u003e \n\u003e \u003e Patch Set 8:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e This is only for local builds. This is unrelated to Jenkins, so we can\u0027t control whether or not the builder is syncing the template before building.\n\u003e \n\u003e The compressed ramdisk isn\u0027t in cpio format, which is why the uncompressed is used. Are you saying we could instead include ramdisk-recovery.img and the zip template would handle it fine?\n\nI\u0027m not familiar with the whole build process here, but if recovery-ramdisk.img is really in the format of ramdisk.cpio.gz or ramdisk.cpio.lzma or whatever, then yes, magiskboot happily accepts these without recompressing, to allow changing the compassion format of a ramdisk in an image, it just still needs to be named ramdisk.cpio for magiskboot itself to find it.\n\nSo, long story short, no need to separately pack uncompressed cpio as long as the kernel can handle whatever the format is (lz4, lzma or whatever), as long as it\u0027s named ramdisk-twrp.cpio or ramdisk-recovery.cpio for inclusion in the twrp_abtemplate zip. :)",
       "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed4a6f6_c28cb496",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2021-12-21T02:40:25Z",
+      "side": 1,
+      "message": "s/compassion/compression ;)",
+      "parentUuid": "6224f31a_669e13b1",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1260e135_fbadc08e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 361
+      },
+      "writtenOn": "2021-12-21T02:40:25Z",
+      "side": 1,
+      "message": "\u003e Patch Set 10:\n\u003e \n\u003e \u003e Patch Set 10:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e I think what you\u0027re suggesting will just make this more complicated, tbh. Not sure what the issue is with the way its presently being done in the patch?\n\nI thought it would actually make the process simplified, since then you wouldn\u0027t need to build the ramdisk twice anymore (once compressed for the .img and once uncompressed for the .zip), you could just build it once (compressed) for the .img and then copy it over for the .zip.\n\nBut suit yourselves, just providing more info on how magiskboot works in case it was helpful. :)",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

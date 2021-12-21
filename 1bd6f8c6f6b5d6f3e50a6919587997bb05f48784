@@ -103,6 +103,23 @@
       "parentUuid": "1260e135_fbadc08e",
       "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b28fa8c_cf8150ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 739
+      },
+      "writtenOn": "2021-12-21T21:12:26Z",
+      "side": 1,
+      "message": "working like a charme here.\n\n/home/infected_/Out/twrp/target/product/instantnoodle/recovery-installer.zip\n\nis it possible to rename the created zip at the time of creation?",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

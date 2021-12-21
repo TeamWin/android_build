@@ -85,6 +85,24 @@
       "message": "\u003e Patch Set 10:\n\u003e \n\u003e \u003e Patch Set 10:\n\u003e  \u003e \n\u003e  \u003e (1 comment)\n\u003e \n\u003e I think what you\u0027re suggesting will just make this more complicated, tbh. Not sure what the issue is with the way its presently being done in the patch?\n\nI thought it would actually make the process simplified, since then you wouldn\u0027t need to build the ramdisk twice anymore (once compressed for the .img and once uncompressed for the .zip), you could just build it once (compressed) for the .img and then copy it over for the .zip.\n\nBut suit yourselves, just providing more info on how magiskboot works in case it was helpful. :)",
       "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33b0c86_1fc92671",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2021-12-21T20:02:40Z",
+      "side": 1,
+      "message": "If someone wants to test and see if the compressed ramdisk works, be my guest. But I know it\u0027s working presently, so I\u0027ll leave that up to others.",
+      "parentUuid": "1260e135_fbadc08e",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

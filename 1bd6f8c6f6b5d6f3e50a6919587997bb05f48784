@@ -138,6 +138,41 @@
       "parentUuid": "2b28fa8c_cf8150ce",
       "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
       "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8adc18_cdf8d354",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2021-12-23T12:12:12Z",
+      "side": 1,
+      "message": "If you want to identify the specific device, just change all occurrences of \"recovery-installer\" to \"$(PRODUCT_DEVICE)-recovery-installer\" (or to \"$(PRODUCT_NAME)-recovery-installer\"), and you are done.",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e856b04f_fc5ec80f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2021-12-23T12:12:12Z",
+      "side": 1,
+      "message": "If you want to identify the specific device, just change all occurrences of \"recovery-installer\" to \"$(PRODUCT_DEVICE)-recovery-installer\" (or to \"$(PRODUCT_NAME)-recovery-installer\"), and you are done.",
+      "parentUuid": "f966325c_a3397b97",
+      "revId": "1bd6f8c6f6b5d6f3e50a6919587997bb05f48784",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
     }
   ]
 }

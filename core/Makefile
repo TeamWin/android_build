@@ -1357,6 +1357,14 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTFS) $(MKBOOTIMG) $(MINIGZIP) $(ADBD) \
 		$(hide) $(MKBOOTFS) $(TARGET_RECOVERY_ROOT_OUT) > $(recovery_uncompressed_ramdisk)
 		$(hide) $(RECOVERY_RAMDISK_COMPRESSOR) < $(recovery_uncompressed_ramdisk) > $(recovery_ramdisk)
 		$(call build-recoveryimage-target, $@)
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(USE_RECOVERY_INSTALLER),true)
+ifneq ($(RECOVERY_INSTALLER_PATH),)
+	cp -fr $(RECOVERY_INSTALLER_PATH) $(PRODUCT_OUT)/installer && cp -f $(recovery_uncompressed_ramdisk) $(PRODUCT_OUT)/installer && cd $(PRODUCT_OUT)/installer && zip -qr recovery-installer META-INF magiskboot-$(TARGET_ARCH) ramdisk-recovery.cpio && cp -f recovery-installer.zip ../ && rm recovery-installer.zip && rm ramdisk-recovery.cpio
+	$(call pretty,"Making recovery installer for A/B devices: $(PRODUCT_OUT)/recovery-installer.zip")
+endif
+endif
+endif
 endif
 
 $(recovery_uncompressed_ramdisk): $(MKBOOTFS) \
@@ -1385,6 +1393,15 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_k
 		$(RECOVERYIMAGE_EXTRA_DEPS)
 		@echo ----- Making recovery image ------
 		$(call build-recoveryimage-target, $@)
+
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(USE_RECOVERY_INSTALLER),true)
+ifneq ($(RECOVERY_INSTALLER_PATH),)
+	cp -fr $(RECOVERY_INSTALLER_PATH) $(PRODUCT_OUT)/installer && cp -f $(INSTALLED_RECOVERYIMAGE_TARGET) $(PRODUCT_OUT)/installer && cd $(PRODUCT_OUT)/installer && zip -qr recovery-installer META-INF magiskboot-$(TARGET_ARCH) recovery.img && cp -f recovery-installer.zip ../ && rm recovery-installer.zip && rm recovery.img
+	$(call pretty,"Making recovery installer for A/B devices: $(PRODUCT_OUT)/recovery-installer.zip")
+endif
+endif
+endif
 endif # BOARD_CUSTOM_BOOTIMG_MK
 
 ifdef RECOVERY_RESOURCE_ZIP

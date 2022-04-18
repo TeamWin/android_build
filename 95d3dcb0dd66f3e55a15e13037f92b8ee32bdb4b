@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6b92c8_5c234bc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 156
+      },
+      "writtenOn": "2022-04-18T22:20:30Z",
+      "side": 1,
+      "message": "Verified building foster and booting mdarcy. This is required to add the recovery dtb to the image as needed by mdarcy and sif.",
+      "revId": "95d3dcb0dd66f3e55a15e13037f92b8ee32bdb4b",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

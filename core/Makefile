@@ -2432,6 +2432,14 @@ endif
 
 INTERNAL_RECOVERYIMAGE_ARGS := --ramdisk $(recovery_ramdisk)
 
+ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
+    ifeq (true,$(BUILDING_VENDOR_BOOT_IMAGE))
+        ifdef GENERIC_KERNEL_CMDLINE
+            INTERNAL_RECOVERYIMAGE_ARGS += --cmdline "$(GENERIC_KERNEL_CMDLINE)"
+        endif
+    endif
+endif
+
 ifneq (truetrue,$(strip $(BUILDING_VENDOR_BOOT_IMAGE))$(strip $(BOARD_USES_RECOVERY_AS_BOOT)))
 INTERNAL_RECOVERYIMAGE_ARGS += $(addprefix --second ,$(INSTALLED_2NDBOOTLOADER_TARGET))
 # Assumes this has already been stripped

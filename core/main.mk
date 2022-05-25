@@ -60,7 +60,7 @@ DATE_FROM_FILE := date -d @$(BUILD_DATETIME_FROM_FILE)
 ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
   # BUILD_NUMBER has a timestamp in it, which means that
   # it will change every time.  Pick a stable value.
-  FILE_NAME_TAG := eng.$(BUILD_USERNAME)
+  FILE_NAME_TAG := eng
 else
   FILE_NAME_TAG := $(file <$(BUILD_NUMBER_FILE))
 endif

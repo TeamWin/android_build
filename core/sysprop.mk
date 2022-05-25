@@ -158,7 +158,7 @@ BUILD_VERSION_TAGS := $(subst $(space),$(comma),$(sort $(BUILD_VERSION_TAGS)))
 # product; used by the OTA server.
 ifeq (,$(strip $(BUILD_FINGERPRINT)))
   ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
-    BF_BUILD_NUMBER := $(BUILD_USERNAME)$$($(DATE_FROM_FILE) +%m%d%H%M)
+    BF_BUILD_NUMBER := $$($(DATE_FROM_FILE) +%m%d%H%M)
   else
     BF_BUILD_NUMBER := $(file <$(BUILD_NUMBER_FILE))
   endif
@@ -256,8 +256,8 @@ $(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) | $(B
 	        BUILD_ID="$(BUILD_ID)" \
 	        BUILD_DISPLAY_ID="$(BUILD_DISPLAY_ID)" \
 	        DATE="$(DATE_FROM_FILE)" \
-	        BUILD_USERNAME="$(BUILD_USERNAME)" \
-	        BUILD_HOSTNAME="$(BUILD_HOSTNAME)" \
+	        BUILD_USERNAME="root" \
+	        BUILD_HOSTNAME="localhost" \
 	        BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
 	        BOARD_BUILD_SYSTEM_ROOT_IMAGE="$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)" \
 	        BOARD_USE_VBMETA_DIGTEST_IN_FINGERPRINT="$(BOARD_USE_VBMETA_DIGTEST_IN_FINGERPRINT)" \

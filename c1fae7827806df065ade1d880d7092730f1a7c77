@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5629c553_1b3efc29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-05-28T14:02:03Z",
+      "side": 1,
+      "message": "Does the commit before this in the relation chain need merged?",
+      "revId": "c1fae7827806df065ade1d880d7092730f1a7c77",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

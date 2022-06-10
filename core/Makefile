@@ -2529,6 +2529,8 @@ $(recovery_ramdisk): $(recovery_uncompressed_ramdisk) $(COMPRESSION_COMMAND_DEPS
 # $(1): output file
 # $(2): optional kernel file
 define build-recoveryimage-target
+  $(if $(strip $(BOARD_RECOVERYIMAGE_MAX_RAMDISK_SIZE)), \
+    $(call assert-max-image-size,$(recovery_ramdisk),$(BOARD_RECOVERYIMAGE_MAX_RAMDISK_SIZE)))
   $(if $(filter true,$(PRODUCT_SUPPORTS_VBOOT)), \
     $(MKBOOTIMG) $(if $(strip $(2)),--kernel $(strip $(2))) $(INTERNAL_RECOVERYIMAGE_ARGS) \
                  $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_RECOVERY_MKBOOTIMG_ARGS) \

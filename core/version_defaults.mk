@@ -40,16 +40,26 @@ ifdef INTERNAL_BUILD_ID_MAKEFILE
   include $(INTERNAL_BUILD_ID_MAKEFILE)
 endif
 
+<<<<<<< HEAD   (e07e49 Version bump to UQ1A.231205.015 [core/build_id.mk])
 DEFAULT_PLATFORM_VERSION := UP1A
 .KATI_READONLY := DEFAULT_PLATFORM_VERSION
 MIN_PLATFORM_VERSION := UP1A
 MAX_PLATFORM_VERSION := VP1A
+=======
+DEFAULT_PLATFORM_VERSION := TP1A
+MIN_PLATFORM_VERSION := TP1A
+MAX_PLATFORM_VERSION := TP1A
+>>>>>>> CHANGE (e2c898 build: allow modification of PLATFORM_VERSION and PLATFORM_V)
 
 # The last stable version name of the platform that was released.  During
 # development, this stays at that previous version, while the codename indicates
 # further work based on the previous version.
+<<<<<<< HEAD   (e07e49 Version bump to UQ1A.231205.015 [core/build_id.mk])
 PLATFORM_VERSION_LAST_STABLE := 14
 .KATI_READONLY := PLATFORM_VERSION_LAST_STABLE
+=======
+PLATFORM_VERSION_LAST_STABLE := 13
+>>>>>>> CHANGE (e2c898 build: allow modification of PLATFORM_VERSION and PLATFORM_V)
 
 # These are the current development codenames, if the build is not a final
 # release build.  If this is a final release build, it is simply "REL".

@@ -1572,6 +1572,9 @@ systemotherimage: $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)
 .PHONY: superimage_empty
 superimage_empty: $(INSTALLED_SUPERIMAGE_EMPTY_TARGET)
 
+.PHONY: fastbootimage
+fastbootimage: $(INSTALLED_FASTBOOTIMAGE_TARGET)
+
 .PHONY: bootimage
 bootimage: $(INSTALLED_BOOTIMAGE_TARGET)
 

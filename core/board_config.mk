@@ -29,7 +29,6 @@ _board_strip_readonly_list += BOARD_BOOT_HEADER_VERSION
 _board_strip_readonly_list += BOARD_BOOTCONFIG
 _board_strip_readonly_list += BOARD_KERNEL_BASE
 _board_strip_readonly_list += BOARD_USES_GENERIC_AUDIO
-_board_strip_readonly_list += BOARD_USES_RECOVERY_AS_BOOT
 _board_strip_readonly_list += BOARD_VENDOR_USE_AKMD
 _board_strip_readonly_list += BOARD_WPA_SUPPLICANT_DRIVER
 _board_strip_readonly_list += BOARD_WLAN_DEVICE

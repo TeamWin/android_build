@@ -25,7 +25,6 @@ ALL_AFDO_PROFILES := $(PRODUCT_AFDO_PROFILES) $(AFDO_PROFILES)
 ifeq ($(WRITE_SOONG_VARIABLES),true)
 
 # Create soong.variables with copies of makefile settings.  Runs every build,
-# but only updates soong.variables if it changes
 $(shell mkdir -p $(dir $(SOONG_VARIABLES)))
 $(call json_start)
 
@@ -331,10 +330,6 @@ $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
 
-$(shell if ! cmp -s $(SOONG_VARIABLES).tmp $(SOONG_VARIABLES); then \
-	  mv $(SOONG_VARIABLES).tmp $(SOONG_VARIABLES); \
-	else \
-	  rm $(SOONG_VARIABLES).tmp; \
-	fi)
+$(shell mv $(SOONG_VARIABLES).tmp $(SOONG_VARIABLES);)
 
 endif # CONFIGURE_SOONG

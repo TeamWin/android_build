@@ -12,6 +12,7 @@ endif
 include $(BUILD_SYSTEM)/art_config.mk
 include $(BUILD_SYSTEM)/dex_preopt_config.mk
 
+<<<<<<< HEAD   (070b69 inherit BoardConfigTWRP)
 ifndef AFDO_PROFILES
 # Set AFDO_PROFILES
 -include vendor/google_data/pgo_profile/sampling/afdo_profiles.mk
@@ -22,6 +23,8 @@ endif
 # PRODUCT_AFDO_PROFILES takes precedence over product-agnostic profiles in AFDO_PROFILES
 ALL_AFDO_PROFILES := $(PRODUCT_AFDO_PROFILES) $(AFDO_PROFILES)
 
+=======
+>>>>>>> CHANGE (8a8a68 build: drop twrp makevars)
 ifeq ($(WRITE_SOONG_VARIABLES),true)
 
 # Create soong.variables with copies of makefile settings.  Runs every build,

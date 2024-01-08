@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38fb7394_bae31352",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25
+      },
+      "writtenOn": "2024-01-08T08:33:19Z",
+      "side": 1,
+      "message": "The original commit claims that it fixes module dependency issue. I\u0027m sure he mistakenly put \"failed\" modules in /vendor/lib/modules rather than /lib/modules.",
+      "revId": "1b692e2248609f50a27c48cce53b7445cecdcfc5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ]
+}

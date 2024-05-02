@@ -2242,7 +2242,7 @@ $(INTERNAL_RECOVERY_RAMDISK_FILES_TIMESTAMP): $(MKBOOTFS) \
 	mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/sdcard $(TARGET_RECOVERY_ROOT_OUT)/tmp
 	# Copying baseline ramdisk...
 	# Use rsync because "cp -Rf" fails to overwrite broken symlinks on Mac.
-	rsync -a --exclude=sdcard $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
+	rsync -a --exclude=sdcard $(IGNORE_VENDOR_LINK) $(IGNORE_RECOVERY_SEPOLICY) $(IGNORE_CACHE_LINK) $(TARGET_ROOT_OUT) $(TARGET_RECOVERY_OUT)
 	# Modifying ramdisk contents...
 	$(if $(filter true,$(BOARD_BUILD_SYSTEM_ROOT_IMAGE)),, \
 	  ln -sf /system/bin/init $(TARGET_RECOVERY_ROOT_OUT)/init)
@@ -3175,7 +3175,11 @@ sync: $(INTERNAL_VENDORIMAGE_FILES)
 else ifdef BOARD_PREBUILT_VENDORIMAGE
 INSTALLED_VENDORIMAGE_TARGET := $(PRODUCT_OUT)/vendor.img
 $(eval $(call copy-one-file,$(BOARD_PREBUILT_VENDORIMAGE),$(INSTALLED_VENDORIMAGE_TARGET)))
-endif
+
+else # BUILDING_VENDOR_IMAGE
+# we need to ignore the broken vendor link when doing the rsync
+IGNORE_VENDOR_LINK := --exclude=vendor
+endif # BUILDING_VENDOR_IMAGE
 
 # -----------------------------------------------------------------
 # product partition image

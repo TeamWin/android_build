@@ -408,6 +408,9 @@ endif
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 
 include vendor/twrp/config/BoardConfigTWRP.mk
+ifneq ($(wildcard vendor/twrp/build/sepolicy/sepolicy.mk),)
+$(eval include vendor/twrp/build/sepolicy/sepolicy.mk)
+endif
 
 # The build system exposes several variables for where to find the kernel
 # headers:

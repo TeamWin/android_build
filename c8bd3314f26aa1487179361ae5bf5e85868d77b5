@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89b6cda_eeb937eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1338
+      },
+      "writtenOn": "2024-10-02T11:56:33Z",
+      "side": 1,
+      "message": ". build/envsetup.sh\nexport ALLOW_MISSING_DEPENDENCIES\u003dtrue\nexport LC_ALL\u003dC\nlunch twrp_caprip-eng\nmake adbd bootimage",
+      "revId": "c8bd3314f26aa1487179361ae5bf5e85868d77b5",
+      "serverId": "9c1c7d72-6534-4d44-b0ea-39f63e804833"
+    }
+  ],
   "submitRequirementResults": []
 }
